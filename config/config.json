@@ -1,0 +1,11 @@
+{
+    "PORT": 8080,
+    "HOST_IP": "0.0.0.0",
+    "mongo": {
+        "replicas"	: ["localhost:27017"],
+        "port"		: 27017,
+        "database"	: "post-list",
+        "username"	: "",
+        "password"	: ""
+    }
+}
