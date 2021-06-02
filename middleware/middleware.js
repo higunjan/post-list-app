@@ -7,3 +7,5 @@ let isLoggedIn = (req, res, next) => {
         return res.status(500).send({status:false, message: "Session Expired, Please Login"});
     }
 }
+
+module.exports = { isLoggedIn }

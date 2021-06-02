@@ -19,7 +19,7 @@ var userSchema = mongoose.Schema({
         required: true,
         select: false
     }
-}, {});
+}, { timestamps: true });
 
 // methods ======================
 // generating a hash

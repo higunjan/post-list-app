@@ -22,6 +22,7 @@ module.exports = function(app, passport, upload) {
 
     require('./auth')(app, passport);
     require('./post')(app, upload);
+    require('./account')(app);
 
     app.get('/*', (req, res) => {
         res.send("Post List App APIs are working.! Hurry.!")
