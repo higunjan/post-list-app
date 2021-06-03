@@ -103,6 +103,161 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "5. Create Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Sample3",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Sample Descriptions3",
+							"type": "text"
+						},
+						{
+							"key": "media",
+							"type": "file",
+							"src": "/D:/Downloads/cyber-rap-score-info1.png"
+						},
+						{
+							"key": "targetDate",
+							"value": "2021-06-03T12:56:58.629Z",
+							"type": "text"
+						},
+						{
+							"key": "scheduleDate",
+							"value": "2021-06-03T12:56:58.629Z",
+							"type": "text"
+						},
+						{
+							"key": "_ref_account",
+							"value": "60b76c682a02e00568e90291",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DOMAIN}}/api/post",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. Get Post for Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{DOMAIN}}/api/post",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Update Posts",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Sample2",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Sample Descriptions2",
+							"type": "text"
+						},
+						{
+							"key": "targetDate",
+							"value": "2021-06-03T12:56:58.629Z",
+							"type": "text"
+						},
+						{
+							"key": "scheduleDate",
+							"value": "2021-06-03T12:56:58.629Z",
+							"type": "text"
+						},
+						{
+							"key": "_ref_account",
+							"value": "60b76c682a02e00568e90291",
+							"type": "text"
+						},
+						{
+							"key": "media",
+							"type": "file",
+							"src": "/D:/Downloads/2822766.jpg"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{DOMAIN}}/api/post/60b8d2dc61c6d5232cfff397",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"post",
+						"60b8d2dc61c6d5232cfff397"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. Delete Post(s)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{DOMAIN}}/api/post/60b908bbb6aa4b1f78fff920;60b8d2dc61c6d5232cfff397",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"post",
+						"60b908bbb6aa4b1f78fff920;60b8d2dc61c6d5232cfff397"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
