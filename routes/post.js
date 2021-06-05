@@ -6,5 +6,5 @@ module.exports = (app, upload) => {
     app.get('/api/post', middleware.isLoggedIn, postController.getPosts);
     app.put('/api/post/:id', middleware.isLoggedIn, upload.any(), postController.updatePost);
     app.delete('/api/post/:id', middleware.isLoggedIn, postController.deletePosts);
-    // app.get('/api/post/search', middleware.isLoggedIn, postController.searchPosts);
+    app.get('/api/post/search', middleware.isLoggedIn, postController.searchPosts);
 }

@@ -168,13 +168,23 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{DOMAIN}}/api/post",
+					"raw": "{{DOMAIN}}/api/post?page=1&limit=20",
 					"host": [
 						"{{DOMAIN}}"
 					],
 					"path": [
 						"api",
 						"post"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						}
 					]
 				}
 			},

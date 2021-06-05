@@ -8,13 +8,7 @@ function connectMongoDB() {
     if(process.env.MONGO_URL) {
         connectionString = process.env.MONGO_URL;
     } else {
-        connectionString = "mongodb://" + str.join(",")
-        global.gConfig.mongo.replicas.forEach(function(item) {
-            str.push(item + '/' + global.gConfig.mongo.database);
-        });
-        if (global.gConfig.mongo.username && global.gConfig.mongo.password) {
-            connectionString = "mongodb://" + global.gConfig.mongo.username + ":" + global.gConfig.mongo.password + '@' + str.join(",");
-        }
+        connectionString = global.gConfig.MONGO_URL;
     }
     //CONNECTION METHOD OF MONGOOSE ORM
     mongoose.connect(connectionString, { poolSize: 10, useUnifiedTopology: true, useNewUrlParser: true });

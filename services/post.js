@@ -38,22 +38,32 @@ module.exports = {
     },
     getPosts: function(options) {
         return new Promise((resolve, reject) => {
-            let { user, page, limit } = options;
-            page = page ? page : 0;
-            limit = limit ? limit : 20;
-            console.log(user);
+            let { user, page, limit, sort } = options;
+            page = page ? +page : 0;
+            limit = limit ? +limit : 20;
+
+            let field = sort.name == "targetDate" ? "targetDate" : "scheduleDate",
+                type = sort.type == "asc" ? 1 : -1; 
+
+            let sortObj = {};
+            sortObj[field] = type;
             Post.find({
                 _ref_user: mongoose.Types.ObjectId(user)
             })
             .limit(limit)
             .skip(limit * page)
-            .exec(function(err, posts) {
+            .populate('_ref_account', 'accountName type')
+            .sort(sortObj)
+            .exec(async function(err, posts) {
                 err = (err && err.error) ? err.error : err;
                 if(err){
                     reject(err);
                     return;
                 }
-                resolve({ status: true, message: "Post retrived success.", data: posts });
+                let count = await Post.countDocuments({
+                    _ref_user: mongoose.Types.ObjectId(user)
+                });
+                resolve({ status: true, totalPosts: count, message: "Post retrived success.", data: posts });
             })
         })
     },
@@ -104,6 +114,55 @@ module.exports = {
                     resolve({ status: true, message: "Delete posts success." });
                   }
             });
+        })
+    },
+    searchPosts: function(options) {
+        return new Promise((resolve, reject) => {
+            let { user, title, description, accountName } = options;
+            let matchObj = [];
+            
+            title ? matchObj.push({ 'title': new RegExp(title, 'gi') }) : null;
+            description ? matchObj.push({ 'description': new RegExp(description, 'gi') }) : null;
+            accountName ? matchObj.push({ 'accountName': new RegExp(accountName, 'gi') }) : null;
+
+            Post.aggregate([
+                {
+                    $match: {
+                        _ref_user: mongoose.Types.ObjectId(user)
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "accounts",
+                        localField: "_ref_account",
+                        foreignField: "_id",
+                        as: "account"
+                    }
+                },
+                {
+                    $unwind: "$account"
+                },
+                {
+                    $match: {
+                        $or: matchObj
+                    }
+                },
+                {
+                    $sort:  {
+                        targetDate: 1
+                    }
+                }
+            ])
+            .exec(async function(err, posts) {
+                err = (err && err.error) ? err.error : err;
+                if(err){
+                    reject(err);
+                    return;
+                }
+                
+                let count = await Post.countDocuments({});
+                resolve({ status: true, scanDocument: count, message: "Post retrived success.", data: posts });
+            })
         })
     },
 }

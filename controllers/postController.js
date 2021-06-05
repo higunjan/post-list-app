@@ -53,9 +53,15 @@ module.exports = {
      */
     getPosts: function(req, res) {
         let { _id } = req.user;
-        let { page, limit } = req.query;
+        let { page, limit, sort } = req.query;
+        if(sort && typeof sort == "string") {
+            console.log(sort);
+            sort = JSON.parse(sort);
+        } else {
+            sort = {}
+        }
         PostService
-            .getPosts({ user: _id, page, limit })
+            .getPosts({ user: _id, page, limit, sort })
             .then(response => {
                 if(response.status) {
                     res.status(200).json(response) 
@@ -65,7 +71,7 @@ module.exports = {
             }).catch(err => {
                 res.status(400).json({ 
                     message: 'Internal Server Error', 
-                    data: body 
+                    data: err 
                 }) 
             })
     },
@@ -128,6 +134,24 @@ module.exports = {
                 res.status(400).json({ 
                     message: 'Internal Server Error', 
                     data: body 
+                }) 
+            })
+    },
+    searchPosts: function(req, res) {
+        let { _id } = req.user;
+        let { title, description, accountName } = req.query;
+        PostService
+            .searchPosts({ user: _id, title, description, accountName })
+            .then(response => {
+                if(response.status) {
+                    res.status(200).json(response) 
+                } else {
+                    res.status(400).json(response)
+                }
+            }).catch(err => {
+                res.status(400).json({ 
+                    message: 'Internal Server Error', 
+                    data: err 
                 }) 
             })
     },
