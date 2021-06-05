@@ -168,7 +168,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{DOMAIN}}/api/post?page=1&limit=20",
+					"raw": "{{DOMAIN}}/api/post?page=499&limit=20",
 					"host": [
 						"{{DOMAIN}}"
 					],
@@ -179,7 +179,7 @@
 					"query": [
 						{
 							"key": "page",
-							"value": "1"
+							"value": "499"
 						},
 						{
 							"key": "limit",
@@ -264,6 +264,64 @@
 						"api",
 						"post",
 						"60b908bbb6aa4b1f78fff920;60b8d2dc61c6d5232cfff397"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9. Sort APIs for based on Target & Scheduled Date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{DOMAIN}}/api/post?sort=\"{'name': 'targetDate', 'type': 'desc'}\"",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"post"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "\"{'name': 'targetDate', 'type': 'desc'}\""
+						}
+					]
+				},
+				"description": "It's same API of Get Post based on Page, Limit"
+			},
+			"response": []
+		},
+		{
+			"name": "10. Search API based on title, description & accountName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{DOMAIN}}/api/post/search?title=1001&description=2002&accountName=test",
+					"host": [
+						"{{DOMAIN}}"
+					],
+					"path": [
+						"api",
+						"post",
+						"search"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "1001"
+						},
+						{
+							"key": "description",
+							"value": "2002"
+						},
+						{
+							"key": "accountName",
+							"value": "test"
+						}
 					]
 				}
 			},
